@@ -1,0 +1,198 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Otto</title>
+    <style>
+
+      body {
+        margin: 10vh auto;
+      }
+
+      .container {
+        padding-bottom: 3em;
+        transition: opacity .4s ease-in-out;
+        opacity: 0;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: center;
+        align-items: baseline;
+      }
+
+      section {
+        flex-grow: 1;
+        text-align: center;
+      }
+
+      .list,
+      .details {
+        padding: 0;
+      }
+
+      .item {
+        list-style: none;
+      }
+
+      .details {
+        opacity: 0;
+        padding: .3em 0 .7em;
+      }
+
+      .field {
+        list-style: none;
+        display: inline-block;
+        font-size: .8em;
+        color: #555;
+        background: #f4f4f2;
+        border-radius: 2px;
+        padding: .4em;
+      }
+
+    </style>
+
+    <script class="wrapper" type="text/x-handlebars-template">
+
+      <section class="activity">
+        <h3>Activities</h3>
+        <ul class="list">
+          {{#each activity}}
+            <li class="item" data-count="{{ @index }}">
+              <a href="#" onclick="toggleDetails('activity', {{ @key }})">
+                {{ name }}
+              </a>
+              <ul class="details">
+                <li class="field"><strong>At home?</strong> {{ atHome }}</li>
+                <li class="field"><strong>Do we have to pay?</strong> {{ requiresPaying }}</li>
+              </ul>
+            </li>
+          {{/each}}
+        </ul>
+    	</section>
+
+      <section class="trip">
+        <h3>Trips</h3>
+        <ul class="list">
+          {{#each trip}}
+            <li class="item" data-count="{{ @index }}">
+              <a href="#" onclick="toggleDetails('trip', {{ @key }})">
+                {{ name }}
+              </a>
+              <ul class="details">
+                <li class="field"><strong>Location</strong> {{ location }}</li>
+                <li class="field"><strong>isRelatedToWhichActivity</strong> (to-do)</li>
+              </ul>
+            </li>
+          {{/each}}
+        </ul>
+    	</section>
+
+      <section class="restaurant">
+        <h3>Restaurants</h3>
+        <ul class="list">
+          {{#each restaurant}}
+            <li class="item" data-count="{{ @index }}">
+              <a href="#" onclick="toggleDetails('restaurant', {{ @key }})">
+                {{ name }}
+              </a>
+              <ul class="details">
+                <li class="field"><strong>Been there yet?</strong> {{ beenThere }}</li>
+                <li class="field"><strong>type</strong> (to-do)</li>
+              </ul>
+            </li>
+          {{/each}}
+        </ul>
+    	</section>
+
+      <section class="tv">
+        <h3>TV</h3>
+        <ul class="list">
+          {{#each tv}}
+            <li class="item" data-count="{{ @index }}">
+              <a href="#" onclick="toggleDetails('tv', {{ @key }})">
+                {{ name }}
+              </a>
+              <ul class="details">
+                <li class="field"><strong>Trailer</strong> {{ trailer }}</li>
+                <li class="field"><strong>Type</strong> {{ type }}</li>
+              </ul>
+            </li>
+          {{/each}}
+        </ul>
+    	</section>
+    </script>
+
+  </head>
+
+  <body>
+
+    <div class="container"></div>
+
+    <script src="https://npmcdn.com/contentful@3.5.0/browser-dist/contentful.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+
+    <script>
+
+      /**
+       * Toggling details
+       */
+
+      var toggleDetails = function(content_type, key) {
+        // Hide visible details
+        var allDetails = document.querySelectorAll('.details');
+        for (var element = 0; element < allDetails.length; element++) {
+            allDetails[element].style.opacity = 0;
+        }
+        // Show respective details
+        var respectiveDetails = '.' + content_type + ' .item[data-count="' + key +'"]' + ' .details';
+        document.querySelector(respectiveDetails).style.opacity = 1;
+      };
+
+      /**
+       * Hook up to Contentful
+       */
+
+      var client = contentful.createClient({
+        space: 'jqjhoo9yeffe',
+        accessToken: 'd2d2ae21926351b571e6406da458d6085929a9ce6118b92bd30c1040fe29feb0'
+      });
+
+      /**
+       * Loop through entries
+       */
+
+      var collection = {};
+
+      var build = function(entries) {
+        entries.items.map(function (entry) {
+          var item = entry.fields;
+          var content_type = entry.sys.contentType.sys.id;
+          // Pop content type arrays
+          if (!collection[content_type]) collection[content_type] = [];
+          // Push new item
+          collection[content_type].push(item);
+        });
+      };
+
+      /**
+       * Get data, then lay it on the screen with Handlebars
+       */
+
+      window.onload = function() {
+        client.getEntries().then(
+          function(entries) {
+            build(entries);
+          }
+        ).then(function() {
+          var source = document.querySelector('.wrapper').innerHTML;
+          var template = Handlebars.compile(source);
+          var html = template(collection);
+          console.log(collection);
+          document.querySelector('.container').innerHTML = html;
+          document.querySelector('.container').style.opacity = 1;
+        });
+      };
+
+    </script>
+
+  </body>
+</html>
