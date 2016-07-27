@@ -1,0 +1,45 @@
+@import 'reset';
+
+body {
+  margin: 10vh auto;
+}
+
+.container {
+  padding-bottom: 3em;
+  transition: opacity .4s ease-in-out;
+  opacity: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: baseline;
+}
+
+section {
+  flex-grow: 1;
+  text-align: center;
+}
+
+.list,
+.details {
+  padding: 0;
+}
+
+.item {
+  list-style: none;
+}
+
+.details {
+  opacity: 0;
+  padding: .3em 0 .7em;
+}
+
+.field {
+  list-style: none;
+  display: inline-block;
+  font-size: .8em;
+  color: #555;
+  background: #f4f4f2;
+  border-radius: 2px;
+  padding: .4em;
+}

@@ -1,0 +1,13 @@
+{
+  "name": "otto",
+  "version": "0.0.1",
+  "description": "A tiny prototype app that will list things to do",
+  "main": "gulpfile.js",
+  "devDependencies": {
+    "browser-sync": "^2.11.1",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.2.0"
+  },
+  "author": "hello@joao.pt",
+  "license": "MIT"
+}
