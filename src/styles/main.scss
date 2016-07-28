@@ -1,23 +1,65 @@
+@import url('https://fonts.googleapis.com/css?family=Crete+Round|Merriweather|Neuton|Vollkorn');
 @import 'reset';
 
+$colorSea:          #008FBE;
+$colorWhite:        #f2f2f2;
+$colorGreyDark:     #333333;
+
+$crete: 'Crete Round', serif;
+$merriweather: 'Merriweather', serif;
+$neuton: 'Neuton', serif;
+$vollkorn: 'Vollkorn', serif;
+
+
+// Mixins
+@mixin tablet {
+  @media (min-width: 660px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+// Styles
+* { box-sizing: border-box }
+
+::selection {
+  background: $colorSea;
+  color: $colorWhite;
+}
+
+::-moz-selection {
+  background: $colorSea;
+  color: $colorWhite;
+}
+
 body {
-  margin: 10vh auto;
+  color: $colorGreyDark;
+  font-family: $neuton;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 .container {
   padding-bottom: 3em;
   transition: opacity .4s ease-in-out;
   opacity: 0;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: baseline;
 }
 
 section {
-  flex-grow: 1;
   text-align: center;
+  margin-top: 2em;
+}
+
+a { text-decoration: none }
+
+h3 {
+  font-size: 2em;
+  line-height: 2;
 }
 
 .list,
@@ -27,19 +69,39 @@ section {
 
 .item {
   list-style: none;
+
+  a {
+    font-size: 1.2em;
+  }
 }
 
 .details {
-  opacity: 0;
-  padding: .3em 0 .7em;
+  display: none;
+  background: rgba(black, .8);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2em;
+  border-radius: 3px;
+
+  &.visible {
+    display: block;
+  }
+}
+
+a.dismiss {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: $colorWhite;
+  font-size: 2em;
+  line-height: 0;
+  padding: 10px;
 }
 
 .field {
   list-style: none;
-  display: inline-block;
-  font-size: .8em;
-  color: #555;
-  background: #f4f4f2;
-  border-radius: 2px;
-  padding: .4em;
+  display: block;
+  color: $colorWhite;
 }

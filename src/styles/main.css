@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css?family=Crete+Round|Merriweather|Neuton|Vollkorn");
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -45,22 +46,38 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+* {
+  box-sizing: border-box; }
+
+::selection {
+  background: #008FBE;
+  color: #f2f2f2; }
+
+::-moz-selection {
+  background: #008FBE;
+  color: #f2f2f2; }
+
 body {
-  margin: 10vh auto; }
+  color: #333333;
+  font-family: "Neuton", serif;
+  font-size: 16px;
+  line-height: 1.5; }
 
 .container {
   padding-bottom: 3em;
   transition: opacity .4s ease-in-out;
-  opacity: 0;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: baseline; }
+  opacity: 0; }
 
 section {
-  flex-grow: 1;
-  text-align: center; }
+  text-align: center;
+  margin-top: 2em; }
+
+a {
+  text-decoration: none; }
+
+h3 {
+  font-size: 2em;
+  line-height: 2; }
 
 .list,
 .details {
@@ -68,16 +85,31 @@ section {
 
 .item {
   list-style: none; }
+  .item a {
+    font-size: 1.2em; }
 
 .details {
-  opacity: 0;
-  padding: .3em 0 .7em; }
+  display: none;
+  background: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 2em;
+  border-radius: 3px; }
+  .details.visible {
+    display: block; }
+
+a.dismiss {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #f2f2f2;
+  font-size: 2em;
+  line-height: 0;
+  padding: 10px; }
 
 .field {
   list-style: none;
-  display: inline-block;
-  font-size: .8em;
-  color: #555;
-  background: #f4f4f2;
-  border-radius: 2px;
-  padding: .4em; }
+  display: block;
+  color: #f2f2f2; }
