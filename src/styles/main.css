@@ -4,7 +4,7 @@
    License: none (public domain)
 */
 html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+h1, h2, h3, .picker, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
@@ -58,24 +58,32 @@ table {
   color: #f2f2f2; }
 
 body {
+  max-width: 30em;
+  margin: 2em auto;
+  padding: 2em;
+  box-shadow: 0 0 2px rgba(51, 51, 51, 0.1);
   color: #333333;
   font-family: "Neuton", serif;
   font-size: 16px;
   line-height: 1.5; }
 
-.container {
-  padding-bottom: 3em;
-  transition: opacity .4s ease-in-out;
-  opacity: 0; }
+.picker {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none; }
+  .picker:hover, .picker:active, .picker:focus {
+    outline: 0;
+    cursor: pointer; }
 
-section {
-  text-align: center;
-  margin-top: 2em; }
+.template-area {
+  display: none; }
 
 a {
   text-decoration: none; }
 
-h3 {
+h3, .picker {
   font-size: 2em;
   line-height: 2; }
 

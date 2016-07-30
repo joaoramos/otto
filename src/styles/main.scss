@@ -38,22 +38,37 @@ $vollkorn: 'Vollkorn', serif;
 }
 
 body {
+  max-width: 30em;
+  margin: 2em auto;
+  padding: 2em;
+  box-shadow: 0 0 2px rgba($colorGreyDark, .1);
   color: $colorGreyDark;
   font-family: $neuton;
   font-size: 16px;
   line-height: 1.5;
 }
 
-.container {
-  padding-bottom: 3em;
-  transition: opacity .4s ease-in-out;
-  opacity: 0;
+.header {}
+
+.picker {
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  background: none;
+  border: none;
+  @extend h3;
+
+  &:hover,
+  &:active,
+  &:focus {
+    outline: 0;
+    cursor: pointer;
+  }
 }
 
-section {
-  text-align: center;
-  margin-top: 2em;
-}
+.template-area { display: none }
+
+section { }
 
 a { text-decoration: none }
 

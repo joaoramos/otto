@@ -2,14 +2,11 @@
 <html>
   <head>
     <title>Otto</title>
-
     <link rel="stylesheet" media="all" href="styles/main.css">
 
-    <script class="wrapper" type="text/x-handlebars-template">
-
+    <script class="template" type="text/x-handlebars-template">
       <!-- 1. Activities -->
-      <section class="activity">
-        <h3>Activities</h3>
+      <section class="activities">
         <ul class="list">
           {{#each activity}}
             <li class="item" data-count="{{ @index }}">
@@ -29,8 +26,7 @@
     	</section>
 
       <!-- 2. Trips -->
-      <section class="trip">
-        <h3>Trips</h3>
+      <section class="trips">
         <ul class="list">
           {{#each trip}}
             <li class="item" data-count="{{ @index }}">
@@ -50,8 +46,7 @@
     	</section>
 
       <!-- 3. Restaurants -->
-      <section class="restaurant">
-        <h3>Restaurants</h3>
+      <section class="restaurants">
         <ul class="list">
           {{#each restaurant}}
             <li class="item" data-count="{{ @index }}">
@@ -72,7 +67,6 @@
 
       <!-- 4. TV -->
       <section class="tv">
-        <h3>TV</h3>
         <ul class="list">
           {{#each tv}}
             <li class="item" data-count="{{ @index }}">
@@ -91,34 +85,26 @@
         </ul>
     	</section>
     </script>
-
   </head>
 
   <body>
 
-    <div class="container"></div>
+    <header class="header">
+      <select class="picker">
+        <option value="activities">Activities</option>
+        <option value="trips">Trips</option>
+        <option value="restaurants">Restaurants</option>
+        <option value="tv">TV</option>
+      </select>
+    </header>
+    
+    <div class="template-area"></div>
 
     <script src="https://npmcdn.com/contentful@3.5.0/browser-dist/contentful.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
 
     <script>
-
-      /**
-       * Toggling details
-       */
-
-      var toggleDetails = function(content_type, key) {
-        if (document.querySelector('.visible')) dismiss();
-
-        // Show respective details
-        var respectiveDetails = '.' + content_type + ' .item[data-count="' + key +'"]' + ' .details';
-        document.querySelector(respectiveDetails).className += ' visible';
-      };
-
-      var dismiss = function() {
-        document.querySelector('.visible').className = 'details';
-      };
-
       /**
        * Hook up to Contentful
        */
@@ -138,12 +124,29 @@
         entries.items.map(function (entry) {
           var item = entry.fields;
           var content_type = entry.sys.contentType.sys.id;
-          // Pop content type arrays
+          // Pop content type arrays, then push new item
           if (!collection[content_type]) collection[content_type] = [];
-          // Push new item
           collection[content_type].push(item);
         });
       };
+
+      /**
+       * Switching types
+       */
+
+      var switchType = function(type) {
+        $('section').hide();
+        $('section.' + type).show();
+      };
+
+       /**
+        * Switching types
+        */
+
+      $('.picker').change(function() {
+        var type = $(this).val();
+        switchType(type);
+      });
 
       /**
        * Get data, then lay it on the screen with Handlebars
@@ -155,16 +158,14 @@
             build(entries);
           }
         ).then(function() {
-          var source = document.querySelector('.wrapper').innerHTML;
+          var source = document.querySelector('.template').innerHTML;
           var template = Handlebars.compile(source);
           var html = template(collection);
-          console.log(collection);
-          document.querySelector('.container').innerHTML = html;
-          document.querySelector('.container').style.opacity = 1;
+          // console.log(collection);
+          $('.template-area').html(html).show();
+          switchType('activities');
         });
       };
-
     </script>
-
   </body>
 </html>
