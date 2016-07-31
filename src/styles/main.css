@@ -1,10 +1,10 @@
-@import url("https://fonts.googleapis.com/css?family=Crete+Round|Merriweather|Neuton|Vollkorn");
+@import url("https://fonts.googleapis.com/css?family=Crete+Round|Merriweather|Neuton|Vollkorn|Fira+Sans:400,500,700");
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
 html, body, div, span, applet, object, iframe,
-h1, h2, h3, .picker, h4, h5, h6, p, blockquote, pre,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
 small, strike, strong, sub, sup, tt, var,
@@ -62,32 +62,70 @@ body {
   margin: 0 auto;
   border: 1px solid #f1f1f1;
   color: #333333;
-  font-family: "Neuton", serif;
-  font-size: 16px;
+  font-family: "Fira Sans", serif;
+  font-size: 15px;
   line-height: 1.5; }
-
-.header {
-  padding: 1em;
-  background: rgba(241, 241, 241, 0.6); }
-
-.picker {
-  appearance: none;
-  background: none;
-  border: none;
-  width: 100%; }
-  .picker:hover, .picker:active, .picker:focus {
-    outline: 0;
-    cursor: pointer; }
-
-.template-area {
-  display: none; }
 
 a {
   text-decoration: none; }
 
-h3, .picker {
+h3 {
   font-size: 2em;
   line-height: 2; }
+
+.header {
+  background: rgba(241, 241, 241, 0.6);
+  overflow: hidden; }
+
+.pick-type {
+  float: left;
+  font-family: "Fira Sans", serif;
+  font-size: 1.4em;
+  font-weight: 700;
+  appearance: none;
+  -webkit-appearance: none;
+  background: url("../img/icon-picker.svg") no-repeat 0.7em 50%;
+  background-size: .4em;
+  padding: .8em .5em .8em 1.2em;
+  border: none; }
+  .pick-type:hover, .pick-type:active, .pick-type:focus {
+    outline: 0;
+    cursor: pointer; }
+
+.pick-mode {
+  float: right;
+  text-align: right; }
+  .pick-mode li {
+    display: inline-block; }
+  .pick-mode a {
+    opacity: .3;
+    display: block;
+    font-size: .9em;
+    font-weight: 500;
+    background-size: .9em;
+    color: #333333;
+    padding: 1.8em 1em; }
+  .pick-mode .refine {
+    background: url("../img/icon-refine.svg") no-repeat left 48%; }
+  .pick-mode .search {
+    background: url("../img/icon-search.svg") no-repeat left 48%; }
+  .pick-mode .active {
+    opacity: 1; }
+
+.template-area {
+  display: none; }
+
+.mode-bar {
+  text-align: center;
+  display: block;
+  padding: .5em 1em;
+  background: rgba(241, 241, 241, 0.2);
+  color: #d8d8d8;
+  font-size: .9em; }
+  .mode-bar .mode {
+    display: none; }
+  .mode-bar .active {
+    display: block; }
 
 .list {
   padding: 0; }
@@ -97,7 +135,6 @@ h3, .picker {
 
 .item {
   display: block;
-  font-size: 1.2em;
   padding: 0.7em 1em;
   color: #333333;
   overflow: hidden; }

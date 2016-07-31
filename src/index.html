@@ -28,6 +28,10 @@
     <script class="template" type="text/x-handlebars-template">
       <!-- 1. Activities -->
       <section class="activities">
+        <nav class="mode-bar">
+          <div class="refine mode active">Refine activities</div>
+          <div class="search mode">Search activities</div>
+        </nav>
         <ul class="list">
           {{#each activity}}
             <li data-count="{{ @index }}">
@@ -41,6 +45,10 @@
 
       <!-- 2. Trips -->
       <section class="trips">
+        <nav class="mode-bar">
+          <div class="refine mode active">Refine trips</div>
+          <div class="search mode">Search trips</div>
+        </nav>
         <ul class="list">
           {{#each trip}}
             <li data-count="{{ @index }}">
@@ -55,6 +63,10 @@
 
       <!-- 3. Restaurants -->
       <section class="restaurants">
+        <nav class="mode-bar">
+          <div class="refine mode active">Refine restaurants</div>
+          <div class="search mode">Search restaurants</div>
+        </nav>
         <ul class="list">
           {{#each restaurant}}
             <li data-count="{{ @index }}">
@@ -68,6 +80,10 @@
 
       <!-- 4. TV -->
       <section class="tv">
+        <nav class="mode-bar">
+          <div class="refine mode active">Refine TV</div>
+          <div class="search mode">Search TV</div>
+        </nav>
         <ul class="list">
           {{#each tv}}
             <li data-count="{{ @index }}">
@@ -85,12 +101,17 @@
   <body>
 
     <header class="header">
-      <select class="picker">
+      <select class="pick-type">
         <option value="activities">Activities</option>
         <option value="trips">Trips</option>
         <option value="restaurants">Restaurants</option>
         <option value="tv">TV</option>
       </select>
+
+      <ul class="pick-mode">
+        <li><a href="#" class="refine active">Refine</a></li>
+        <li><a href="#" class="search">Search</a></li>
+      </ul>
     </header>
 
     <div class="template-area"></div>
@@ -135,14 +156,24 @@
         $('section.' + type).show();
       };
 
-       /**
-        * Switching types
-        */
-
-      $('.picker').change(function() {
+      $('.pick-type').change(function() {
         var type = $(this).val();
         switchType(type);
       });
+
+      /**
+       * Switching modes
+       */
+
+     var switchMode = function(mode) {
+       $('.pick-mode a').toggleClass('active');
+       $('.mode').toggleClass('active');
+     };
+
+     $('.pick-mode a').click(function() {
+       var mode = $(this).attr('class');
+       if (!$(this).hasClass('active')) switchMode(mode);
+     });
 
       /**
        * Get data, then compile with Handlebars

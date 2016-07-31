@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Crete+Round|Merriweather|Neuton|Vollkorn');
+@import url('https://fonts.googleapis.com/css?family=Crete+Round|Merriweather|Neuton|Vollkorn|Fira+Sans:400,500,700');
 @import 'reset';
 
 $colorSea:          #008FBE;
@@ -6,6 +6,7 @@ $colorWhite:        #f2f2f2;
 $colorGreyDark:     #333333;
 $colorGreyLight:    #f1f1f1;
 
+$fira: 'Fira Sans', serif;
 $crete: 'Crete Round', serif;
 $merriweather: 'Merriweather', serif;
 $neuton: 'Neuton', serif;
@@ -43,22 +44,34 @@ body {
   margin: 0 auto;
   border: 1px solid $colorGreyLight;
   color: $colorGreyDark;
-  font-family: $neuton;
-  font-size: 16px;
+  font-family: $fira;
+  font-size: 15px;
   line-height: 1.5;
 }
 
-.header {
-  padding: 1em;
-  background: rgba($colorGreyLight, .6);
+a { text-decoration: none }
+
+h3 {
+  font-size: 2em;
+  line-height: 2;
 }
 
-.picker {
-  @extend h3;
+.header {
+  background: rgba($colorGreyLight, .6);
+  overflow: hidden;
+}
+
+.pick-type {
+  float: left;
+  font-family: $fira;
+  font-size: 1.4em;
+  font-weight: 700;
   appearance: none;
-  background: none;
+  -webkit-appearance: none;
+  background: url('../img/icon-picker.svg') no-repeat .7em 50%;
+  background-size: .4em;
+  padding: .8em .5em .8em 1.2em;
   border: none;
-  width: 100%;
 
   &:hover,
   &:active,
@@ -68,13 +81,40 @@ body {
   }
 }
 
+.pick-mode {
+  float: right;
+  text-align: right;
+
+  li { display: inline-block }
+
+  a {
+    opacity: .3;
+    display: block;
+    font-size: .9em;
+    font-weight: 500;
+    background-size: .9em;
+    color: $colorGreyDark;
+    padding: 1.8em 1em;
+  }
+
+  .refine { background: url('../img/icon-refine.svg') no-repeat left 48% }
+  .search { background: url('../img/icon-search.svg') no-repeat left 48% }
+
+  .active { opacity: 1 }
+}
+
 .template-area { display: none }
 
-a { text-decoration: none }
+.mode-bar {
+  text-align: center;
+  display: block;
+  padding: .5em 1em;
+  background: rgba($colorGreyLight, .2);
+  color: darken($colorGreyLight, 10%);
+  font-size: .9em;
 
-h3 {
-  font-size: 2em;
-  line-height: 2;
+  .mode { display: none }
+  .active { display: block }
 }
 
 .list {
@@ -88,21 +128,9 @@ h3 {
 
 .item {
   display: block;
-  font-size: 1.2em;
   padding: 0.7em 1em;
   color: $colorGreyDark;
   overflow: hidden;
-
-  &:link,
-  &:visited {
-
-  }
-
-  &:hover,
-  &:active,
-  &:focus {
-
-  }
 }
 
 .detail {
