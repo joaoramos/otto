@@ -4,6 +4,7 @@
 $colorSea:          #008FBE;
 $colorWhite:        #f2f2f2;
 $colorGreyDark:     #333333;
+$colorGreyLight:    #f1f1f1;
 
 $crete: 'Crete Round', serif;
 $merriweather: 'Merriweather', serif;
@@ -40,15 +41,16 @@ $vollkorn: 'Vollkorn', serif;
 body {
   max-width: 30em;
   margin: 0 auto;
-  padding: 2em;
-  box-shadow: 0 0 2px rgba($colorGreyDark, .1);
+  border: 1px solid $colorGreyLight;
   color: $colorGreyDark;
   font-family: $neuton;
   font-size: 16px;
   line-height: 1.5;
 }
 
-.header {}
+.header {
+  padding: 0 2em;
+}
 
 .picker {
   appearance: none;
@@ -80,14 +82,36 @@ h3 {
 .list,
 .details {
   padding: 0;
+
+  li {
+    list-style: none;
+    border-top: 1px solid $colorGreyLight;
+  }
 }
 
 .item {
-  list-style: none;
+  display: block;
+  font-size: 1.2em;
+  padding: 0.7em 2em;
+  color: $colorGreyDark;
+  overflow: hidden;
 
-  a {
-    font-size: 1.2em;
+  &:link,
+  &:visited {
+
   }
+
+  &:hover,
+  &:active,
+  &:focus {
+
+  }
+}
+
+.detail {
+  color: $colorGreyLight;
+  display: inline-block;
+  float: right;
 }
 
 .details {

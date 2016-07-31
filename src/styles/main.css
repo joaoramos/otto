@@ -60,12 +60,14 @@ table {
 body {
   max-width: 30em;
   margin: 0 auto;
-  padding: 2em;
-  box-shadow: 0 0 2px rgba(51, 51, 51, 0.1);
+  border: 1px solid #f1f1f1;
   color: #333333;
   font-family: "Neuton", serif;
   font-size: 16px;
   line-height: 1.5; }
+
+.header {
+  padding: 0 2em; }
 
 .picker {
   appearance: none;
@@ -90,11 +92,22 @@ h3, .picker {
 .list,
 .details {
   padding: 0; }
+  .list li,
+  .details li {
+    list-style: none;
+    border-top: 1px solid #f1f1f1; }
 
 .item {
-  list-style: none; }
-  .item a {
-    font-size: 1.2em; }
+  display: block;
+  font-size: 1.2em;
+  padding: 0.7em 2em;
+  color: #333333;
+  overflow: hidden; }
+
+.detail {
+  color: #f1f1f1;
+  display: inline-block;
+  float: right; }
 
 .details {
   display: none;
