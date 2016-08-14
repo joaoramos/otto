@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css?family=Crete+Round|Merriweather|Neuton|Vollkorn|Fira+Sans:400,500,700");
+@import url("https://fonts.googleapis.com/css?family=Fira+Sans:400,500,700");
 /* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
@@ -116,16 +116,28 @@ h3 {
   display: none; }
 
 .mode-bar {
-  text-align: center;
-  display: block;
-  padding: .5em 1em;
-  background: rgba(241, 241, 241, 0.2);
-  color: #d8d8d8;
-  font-size: .9em; }
+  display: block; }
+  .mode-bar input[type="search"] {
+    -webkit-appearance: textfield; }
+  .mode-bar input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none; }
   .mode-bar .mode {
-    display: none; }
-  .mode-bar .active {
-    display: block; }
+    display: none;
+    font-family: "Fira Sans", serif;
+    font-size: .9em;
+    font-weight: 500;
+    border: none;
+    padding: 1em;
+    margin: 0;
+    height: 47px;
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    color: #d8d8d8; }
+    .mode-bar .mode.active {
+      display: block; }
+  .mode-bar input[type="search"]::-webkit-input-placeholder {
+    color: #d8d8d8; }
 
 .list {
   padding: 0; }

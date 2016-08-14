@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css?family=Crete+Round|Merriweather|Neuton|Vollkorn|Fira+Sans:400,500,700');
+// @import url('https://fonts.googleapis.com/css?family=Crete+Round|Neuton|Vollkorn|Fira+Sans:400,500,700');
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,700');
 @import 'reset';
 
 $colorSea:          #008FBE;
@@ -7,11 +8,9 @@ $colorGreyDark:     #333333;
 $colorGreyLight:    #f1f1f1;
 
 $fira: 'Fira Sans', serif;
-$crete: 'Crete Round', serif;
-$merriweather: 'Merriweather', serif;
-$neuton: 'Neuton', serif;
-$vollkorn: 'Vollkorn', serif;
-
+// $crete: 'Crete Round', serif;
+// $neuton: 'Neuton', serif;
+// $vollkorn: 'Vollkorn', serif;
 
 // Mixins
 @mixin tablet {
@@ -106,15 +105,29 @@ h3 {
 .template-area { display: none }
 
 .mode-bar {
-  text-align: center;
   display: block;
-  padding: .5em 1em;
-  background: rgba($colorGreyLight, .2);
-  color: darken($colorGreyLight, 10%);
-  font-size: .9em;
 
-  .mode { display: none }
-  .active { display: block }
+  input[type="search"] { -webkit-appearance: textfield }
+  input[type="search"]::-webkit-search-decoration { -webkit-appearance: none }
+
+  .mode {
+    display: none;
+    font-family: $fira;
+    font-size: .9em;
+    font-weight: 500;
+    border: none;
+    padding: 1em;
+    margin: 0;
+    height: 47px;
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    color: darken($colorGreyLight, 10%);
+
+    &.active { display: block }
+  }
+
+  input[type="search"]::-webkit-input-placeholder { color: darken($colorGreyLight, 10%) }
 }
 
 .list {

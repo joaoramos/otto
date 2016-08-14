@@ -26,11 +26,15 @@
     <link rel="stylesheet" media="all" href="styles/main.css">
 
     <script class="template" type="text/x-handlebars-template">
+      <div id="lists">
+
       <!-- 1. Activities -->
-      <section class="activities">
+      <section id="activities">
         <nav class="mode-bar">
-          <div class="refine mode active">Refine activities</div>
-          <div class="search mode">Search activities</div>
+          <div class="refine mode">
+            Refine activities
+          </div>
+          <input type="search" class="search mode active" placeholder="Search activities" />
         </nav>
         <ul class="list">
           {{#each activity}}
@@ -44,10 +48,12 @@
     	</section>
 
       <!-- 2. Trips -->
-      <section class="trips">
+      <section id="trips">
         <nav class="mode-bar">
-          <div class="refine mode active">Refine trips</div>
-          <div class="search mode">Search trips</div>
+          <div class="refine mode">
+            Refine trips
+          </div>
+          <input type="search" class="search mode active" placeholder="Search trips" />
         </nav>
         <ul class="list">
           {{#each trip}}
@@ -62,10 +68,12 @@
     	</section>
 
       <!-- 3. Restaurants -->
-      <section class="restaurants">
+      <section id="restaurants">
         <nav class="mode-bar">
-          <div class="refine mode active">Refine restaurants</div>
-          <div class="search mode">Search restaurants</div>
+          <div class="refine mode">
+            Refine restaurants
+          </div>
+          <input type="search" class="search mode active" placeholder="Search restaurants" />
         </nav>
         <ul class="list">
           {{#each restaurant}}
@@ -79,10 +87,12 @@
     	</section>
 
       <!-- 4. TV -->
-      <section class="tv">
+      <section id="tv">
         <nav class="mode-bar">
-          <div class="refine mode active">Refine TV</div>
-          <div class="search mode">Search TV</div>
+          <div class="refine mode">
+            Refine TV
+          </div>
+          <input type="search" class="search mode active" placeholder="Search TV" />
         </nav>
         <ul class="list">
           {{#each tv}}
@@ -109,16 +119,17 @@
       </select>
 
       <ul class="pick-mode">
-        <li><a href="#" class="refine active">Refine</a></li>
-        <li><a href="#" class="search">Search</a></li>
+        <li><a href="#" class="refine">Refine</a></li>
+        <li><a href="#" class="search active">Search</a></li>
       </ul>
     </header>
 
     <div class="template-area"></div>
 
     <script src="https://npmcdn.com/contentful@3.5.0/browser-dist/contentful.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.2.0/list.min.js"></script>
 
     <script>
 
@@ -153,7 +164,7 @@
 
       var switchType = function(type) {
         $('section').hide();
-        $('section.' + type).show();
+        $('section#' + type).show();
       };
 
       $('.pick-type').change(function() {
@@ -188,9 +199,25 @@
           var source = $('.template').html();
           var template = Handlebars.compile(source);
           var html = template(collection);
+
+          // 1. Show data in console
           console.log(collection);
+
+          // 2. Render data to screen
           $('.template-area').html(html).show();
+
+          // 3. Fire up activities list
           switchType('activities');
+
+          // 4. Enable searching
+          var options = {
+            valueNames: [ 'item' ]
+          };
+
+          var activitiesList = new List('activities', options);
+          var tripsList = new List('trips', options);
+          var restaurantsList = new List('restaurants', options);
+          var tvList = new List('tv', options);
         });
       };
     </script>
